@@ -1,0 +1,16 @@
+name: process benchmark results
+
+on:
+  repository_dispatch:
+    types: [benchmark_results]
+
+jobs:
+  PROCESS_RESULTS:
+    runs-on: ubuntu-latest
+    steps:
+      - name: parse request
+        shell: bash
+        run: |
+          echo "asset: ${{ github.event.client_payload.asset }}"
+          echo "event: ${{ github.event }}"
+          echo "client_payload: ${{ github.event.client_payload }}"
