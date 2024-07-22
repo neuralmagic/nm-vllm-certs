@@ -23,12 +23,6 @@ To utilize the weight sparsity features, include the optional `sparse` dependenc
 pip install nm-vllm[sparse] --extra-index-url https://pypi.neuralmagic.com/simple
 ```
 
-You can also build and install `nm-vllm` from source (this will take ~10 minutes):
-```bash
-git clone https://github.com/neuralmagic/nm-vllm.git
-cd nm-vllm
-pip install -e .[sparse] --extra-index-url https://pypi.neuralmagic.com/simple
-
 ### Docker
 
 The [`nm-vllm-ent` container registry](https://github.com/neuralmagic/nm-vllm-certs/pkgs/container/nm-vllm-ent) includes premade docker images.
