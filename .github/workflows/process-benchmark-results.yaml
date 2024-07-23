@@ -38,10 +38,14 @@ jobs:
       - name: Download GHA-formatted JSON files
         shell: bash
         run: |
-          gcloud storage cp -r \
-            ${{ secrets.GCP_BUILD_ASSETS }}/${{ github.event.client_payload.run_id }}/gh-action-benchmark-jsons \
+          base_path="${{ secrets.GCP_BUILD_ASSETS }}"
+          run_id="${{ github.event.client_payload.run_id }}"
+          asset="${{ github.event.client_payload.asset }}"
+          mkdir downloads
+          gcloud storage cp \
+            "$base_path/$run_id/$asset/*.json" \
             downloads
-          ls -RA
+          ls -RA downloads
 
 
       - name: nm-github-action-benchmark(bigger_is_better.json)
