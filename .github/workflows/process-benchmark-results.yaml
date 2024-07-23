@@ -6,6 +6,9 @@ on:
 
 jobs:
   PROCESS_RESULTS:
+    permissions:
+      contents: 'write'
+      id-token: 'write'
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
