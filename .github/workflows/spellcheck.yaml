@@ -1,0 +1,22 @@
+name: Spellcheck
+
+on: push
+
+jobs:
+
+  SPELLCHECK:
+    runs-on: ubuntu-latest
+    steps:
+
+      - uses: actions/checkout@v4
+
+      - name: Common misspellings check
+        uses: codespell-project/actions-codespell@v2
+
+      - name: Check spelling
+        uses: rojopolis/spellcheck-github-actions@v0
+        if: '!cancelled()'
+        with:
+          config_path: .github/config/spellcheck.yml
+          source_files: README.md
+          task_name: Markdown
