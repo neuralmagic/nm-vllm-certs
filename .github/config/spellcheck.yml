@@ -1,0 +1,17 @@
+matrix:
+- name: Markdown
+  pipeline:
+  - pyspelling.filters.html:
+      comments: false
+      ignores:
+      - code
+      - pre
+  aspell:
+    lang: en
+    d: en_US
+    mode: markdown
+  dictionary:
+    wordlists:
+    - .github/config/custom-wordlist.txt
+  sources:
+  - '**/*.md'
