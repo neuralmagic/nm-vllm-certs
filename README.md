@@ -2,7 +2,7 @@
 
 
 ## Overview
-The `nm-vllm` packages published in this repository are Neural Magic Enterprise Editions of [vLLM](https://github.com/vllm-project/vllm). Packages are versioned Python wheels and docker images. These are released as "production level" official releases and "beta level" nightly releases.
+The `nm-vllm` packages published in this repository are Neural Magic Enterprise Editions of [vLLM](https://github.com/vllm-project/vllm). Packages are versioned Python wheels and Docker images. These are released as "production level" official releases and "beta level" nightly releases.
 
 Official releases are made at the discretion of Neural Magic, but typically track with `vllm` releases. These wheels are available via the official PyPI as well as [Neural Magic's PyPI](https://pypi.neuralmagic.com).
 
