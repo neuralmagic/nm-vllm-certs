@@ -33,7 +33,7 @@ pip install nm-vllm[sparse] --extra-index-url https://pypi.neuralmagic.com/simpl
 
 ### Docker
 
-The `nm-vllm-certs` [container registry](https://github.com/neuralmagic/nm-vllm-certs/pkgs/container/nm-vllm-ent) includes premade docker images.
+The `nm-vllm-ent` [container registry](https://github.com/neuralmagic/nm-vllm-certs/pkgs/container/nm-vllm-ent) includes premade docker images.
 
 Launch the OpenAI-compatible server with:
 
