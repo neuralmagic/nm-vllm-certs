@@ -33,13 +33,13 @@ pip install nm-vllm[sparse] --extra-index-url https://pypi.neuralmagic.com/simpl
 
 ### Docker
 
-The `nm-vllm-certs` [container registry](https://github.com/neuralmagic/nm-vllm-certs/pkgs/container/nm-vllm-certs) includes premade docker images.
+The `nm-vllm-certs` [container registry](https://github.com/neuralmagic/nm-vllm-certs/pkgs/container/nm-vllm-ent) includes premade docker images.
 
 Launch the OpenAI-compatible server with:
 
 ```bash
 MODEL_ID=Qwen/Qwen2-0.5B-Instruct
-docker run --gpus all --shm-size 2g ghcr.io/neuralmagic/nm-vllm-certs:latest --model $MODEL_ID
+docker run --gpus all --shm-size 2g ghcr.io/neuralmagic/nm-vllm-ent:latest --model $MODEL_ID
 ```
 
 
