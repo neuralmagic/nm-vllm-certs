@@ -2,11 +2,16 @@
 
 
 ## Overview
-The `nm-vllm` packages published in this repository are Neuralmagic Enterprise Edition of [vLLM](https://github.com/vllm-project/vllm). Packages are versioned Python wheels and docker images. These are released as "production level" official releases and "beta level" nightly releases.
+The `nm-vllm` packages published in this repository are Neural Magic Enterprise Editions of [vLLM](https://github.com/vllm-project/vllm). Packages are versioned Python wheels and docker images. These are released as "production level" official releases and "beta level" nightly releases.
 
-Official releases are made at the discretion of Neuralmagic, but typically track with `vllm` releases. These wheels are available via the official PyPI as well as [Neuralmagic's PyPI](https://pypi.neuralmagic.com).
+Official releases are made at the discretion of Neural Magic, but typically track with `vllm` releases. These wheels are available via the official PyPI as well as [Neuralmagic's PyPI](https://pypi.neuralmagic.com).
 
 Nightly builds are released every night given green runs in automation. The wheels are available at [Neuralmagic's PyPI](https://pypi.neuralmagic.com).
+
+
+## Benchmarks
+
+Please see how we are doing with our benchmark results [here]( https://neuralmagic.github.io/nm-vllm-certs/dev/bench/).
 
 
 ## Installation
@@ -28,19 +33,14 @@ pip install nm-vllm[sparse] --extra-index-url https://pypi.neuralmagic.com/simpl
 
 ### Docker
 
-The `nm-vllm-ent` [container registry](https://github.com/neuralmagic/nm-vllm-certs/pkgs/container/nm-vllm-ent) includes premade docker images.
+The `nm-vllm-certs` [container registry](https://github.com/neuralmagic/nm-vllm-certs/pkgs/container/nm-vllm-certs) includes premade docker images.
 
 Launch the OpenAI-compatible server with:
 
 ```bash
 MODEL_ID=Qwen/Qwen2-0.5B-Instruct
-docker run --gpus all --shm-size 2g ghcr.io/neuralmagic/nm-vllm-ent:latest --model $MODEL_ID
+docker run --gpus all --shm-size 2g ghcr.io/neuralmagic/nm-vllm-certs:latest --model $MODEL_ID
 ```
-
-
-## Benchmarks
-
-Please see our benchmark results [here]( https://neuralmagic.github.io/nm-vllm-certs/dev/bench/).
 
 
 ## Models
