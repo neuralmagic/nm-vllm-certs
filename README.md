@@ -4,9 +4,9 @@
 ## Overview
 The `nm-vllm` packages published in this repository are Neural Magic Enterprise Editions of [vLLM](https://github.com/vllm-project/vllm). Packages are versioned Python wheels and docker images. These are released as "production level" official releases and "beta level" nightly releases.
 
-Official releases are made at the discretion of Neural Magic, but typically track with `vllm` releases. These wheels are available via the official PyPI as well as [Neuralmagic's PyPI](https://pypi.neuralmagic.com).
+Official releases are made at the discretion of Neural Magic, but typically track with `vllm` releases. These wheels are available via the official PyPI as well as [Neural Magic's PyPI](https://pypi.neuralmagic.com).
 
-Nightly builds are released every night given green runs in automation. The wheels are available at [Neuralmagic's PyPI](https://pypi.neuralmagic.com).
+Nightly builds are released every night given green runs in automation. The wheels are available at [Neural Magic's PyPI](https://pypi.neuralmagic.com).
 
 
 ## Benchmarks
@@ -45,6 +45,6 @@ docker run --gpus all --shm-size 2g ghcr.io/neuralmagic/nm-vllm-ent:latest --mod
 
 ## Models
 
-Neuralmagic maintains a variety of optimized models on our Hugging Face organization profiles:
+Neural Magic maintains a variety of optimized models on our Hugging Face organization profiles:
 - [neuralmagic](https://huggingface.co/neuralmagic)
 - [nm-testing](https://huggingface.co/nm-testing)
