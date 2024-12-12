@@ -1,0 +1,54 @@
+window.BENCHMARK_DATA = {
+  "lastUpdate": 1733970151064,
+  "repoUrl": "https://github.com/neuralmagic/nm-vllm-ent",
+  "entries": {
+    "smaller_is_better": [
+      {
+        "commit": {
+          "author": {
+            "name": "Domenic Barbuzzi",
+            "username": "dbarbuzzi",
+            "email": "domenic@neuralmagic.com"
+          },
+          "committer": {
+            "name": "GitHub",
+            "username": "web-flow",
+            "email": "noreply@github.com"
+          },
+          "id": "271bafa0bc4d83cbdc0841e2a50f046552741872",
+          "message": "Use 4x A100s (not 4x H100s) during remote push (#165)\n\nThis PR updates one of the remote push jobs to use a `k8s-a100-quad`\ninstead of a `k8s-h100-quad`, as the latter would tie up all of our\nH100s (as well as delay the job until they are all available).",
+          "timestamp": "2024-12-11T21:01:46Z",
+          "url": "https://github.com/neuralmagic/nm-vllm-ent/commit/271bafa0bc4d83cbdc0841e2a50f046552741872"
+        },
+        "date": 1733970149851,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "{\"name\": \"mean_ttft_ms\", \"description\": \"VLLM Serving - Dense\\nmodel - meta-llama/Meta-Llama-3-8B-Instruct\\nmax-model-len - 4096\\nsparsity - None\\nbenchmark_serving {\\n  \\\"nr-qps-pair_\\\": \\\"300,1\\\",\\n  \\\"dataset\\\": \\\"sharegpt\\\"\\n}\", \"gpu_description\": \"NVIDIA H100 80GB HBM3 x 1\", \"python_version\": \"3.10.12\", \"torch_version\": \"2.4.0+cu121\"}",
+            "value": 50.74407246274252,
+            "unit": "ms",
+            "extra": "{\"description\": \"VLLM Serving - Dense\\nmodel - meta-llama/Meta-Llama-3-8B-Instruct\\nmax-model-len - 4096\\nsparsity - None\\nbenchmark_serving {\\n  \\\"nr-qps-pair_\\\": \\\"300,1\\\",\\n  \\\"dataset\\\": \\\"sharegpt\\\"\\n}\", \"benchmarking_context\": {\"vllm_version\": \"0.6.3.0.20241212\", \"python_version\": \"3.10.12\", \"torch_version\": \"2.4.0+cu121\", \"torch_cuda_version\": \"12.1\", \"cuda_devices\": \"[_CudaDeviceProperties(name='NVIDIA H100 80GB HBM3', major=9, minor=0, total_memory=80994MB, multi_processor_count=132)]\", \"cuda_device_names\": [\"NVIDIA H100 80GB HBM3\"]}, \"gpu_description\": \"NVIDIA H100 80GB HBM3 x 1\", \"script_name\": \"benchmark_serving.py\", \"script_args\": {\"description\": \"VLLM Serving - Dense\\nmodel - meta-llama/Meta-Llama-3-8B-Instruct\\nmax-model-len - 4096\\nsparsity - None\\nbenchmark_serving {\\n  \\\"nr-qps-pair_\\\": \\\"300,1\\\",\\n  \\\"dataset\\\": \\\"sharegpt\\\"\\n}\", \"backend\": \"vllm\", \"version\": \"N/A\", \"base_url\": null, \"host\": \"127.0.0.1\", \"port\": 9000, \"endpoint\": \"/generate\", \"dataset\": \"sharegpt\", \"num_input_tokens\": null, \"num_output_tokens\": null, \"model\": \"meta-llama/Meta-Llama-3-8B-Instruct\", \"tokenizer\": \"meta-llama/Meta-Llama-3-8B-Instruct\", \"best_of\": 1, \"use_beam_search\": false, \"log_model_io\": false, \"seed\": 0, \"trust_remote_code\": false, \"disable_tqdm\": false, \"save_directory\": \"benchmark-results\", \"num_prompts_\": null, \"request_rate_\": null, \"nr_qps_pair_\": [300, \"1.0\"], \"server_tensor_parallel_size\": 1, \"server_args\": \"{'model': 'meta-llama/Meta-Llama-3-8B-Instruct', 'tokenizer': 'meta-llama/Meta-Llama-3-8B-Instruct', 'max-model-len': 4096, 'host': '127.0.0.1', 'port': 9000, 'tensor-parallel-size': 1, 'disable-log-requests': ''}\"}, \"date\": \"2024-12-12 02:21:13 UTC\", \"model\": \"meta-llama/Meta-Llama-3-8B-Instruct\", \"dataset\": \"sharegpt\"}"
+          },
+          {
+            "name": "{\"name\": \"mean_tpot_ms\", \"description\": \"VLLM Serving - Dense\\nmodel - meta-llama/Meta-Llama-3-8B-Instruct\\nmax-model-len - 4096\\nsparsity - None\\nbenchmark_serving {\\n  \\\"nr-qps-pair_\\\": \\\"300,1\\\",\\n  \\\"dataset\\\": \\\"sharegpt\\\"\\n}\", \"gpu_description\": \"NVIDIA H100 80GB HBM3 x 1\", \"python_version\": \"3.10.12\", \"torch_version\": \"2.4.0+cu121\"}",
+            "value": 11.199094152912288,
+            "unit": "ms",
+            "extra": "{\"description\": \"VLLM Serving - Dense\\nmodel - meta-llama/Meta-Llama-3-8B-Instruct\\nmax-model-len - 4096\\nsparsity - None\\nbenchmark_serving {\\n  \\\"nr-qps-pair_\\\": \\\"300,1\\\",\\n  \\\"dataset\\\": \\\"sharegpt\\\"\\n}\", \"benchmarking_context\": {\"vllm_version\": \"0.6.3.0.20241212\", \"python_version\": \"3.10.12\", \"torch_version\": \"2.4.0+cu121\", \"torch_cuda_version\": \"12.1\", \"cuda_devices\": \"[_CudaDeviceProperties(name='NVIDIA H100 80GB HBM3', major=9, minor=0, total_memory=80994MB, multi_processor_count=132)]\", \"cuda_device_names\": [\"NVIDIA H100 80GB HBM3\"]}, \"gpu_description\": \"NVIDIA H100 80GB HBM3 x 1\", \"script_name\": \"benchmark_serving.py\", \"script_args\": {\"description\": \"VLLM Serving - Dense\\nmodel - meta-llama/Meta-Llama-3-8B-Instruct\\nmax-model-len - 4096\\nsparsity - None\\nbenchmark_serving {\\n  \\\"nr-qps-pair_\\\": \\\"300,1\\\",\\n  \\\"dataset\\\": \\\"sharegpt\\\"\\n}\", \"backend\": \"vllm\", \"version\": \"N/A\", \"base_url\": null, \"host\": \"127.0.0.1\", \"port\": 9000, \"endpoint\": \"/generate\", \"dataset\": \"sharegpt\", \"num_input_tokens\": null, \"num_output_tokens\": null, \"model\": \"meta-llama/Meta-Llama-3-8B-Instruct\", \"tokenizer\": \"meta-llama/Meta-Llama-3-8B-Instruct\", \"best_of\": 1, \"use_beam_search\": false, \"log_model_io\": false, \"seed\": 0, \"trust_remote_code\": false, \"disable_tqdm\": false, \"save_directory\": \"benchmark-results\", \"num_prompts_\": null, \"request_rate_\": null, \"nr_qps_pair_\": [300, \"1.0\"], \"server_tensor_parallel_size\": 1, \"server_args\": \"{'model': 'meta-llama/Meta-Llama-3-8B-Instruct', 'tokenizer': 'meta-llama/Meta-Llama-3-8B-Instruct', 'max-model-len': 4096, 'host': '127.0.0.1', 'port': 9000, 'tensor-parallel-size': 1, 'disable-log-requests': ''}\"}, \"date\": \"2024-12-12 02:21:13 UTC\", \"model\": \"meta-llama/Meta-Llama-3-8B-Instruct\", \"dataset\": \"sharegpt\"}"
+          },
+          {
+            "name": "{\"name\": \"mean_ttft_ms\", \"description\": \"VLLM Serving - Dense\\nmodel - facebook/opt-350m\\nmax-model-len - 2048\\nsparsity - None\\nbenchmark_serving {\\n  \\\"nr-qps-pair_\\\": \\\"300,1\\\",\\n  \\\"dataset\\\": \\\"sharegpt\\\"\\n}\", \"gpu_description\": \"NVIDIA H100 80GB HBM3 x 1\", \"python_version\": \"3.10.12\", \"torch_version\": \"2.4.0+cu121\"}",
+            "value": 61.91778301727027,
+            "unit": "ms",
+            "extra": "{\"description\": \"VLLM Serving - Dense\\nmodel - facebook/opt-350m\\nmax-model-len - 2048\\nsparsity - None\\nbenchmark_serving {\\n  \\\"nr-qps-pair_\\\": \\\"300,1\\\",\\n  \\\"dataset\\\": \\\"sharegpt\\\"\\n}\", \"benchmarking_context\": {\"vllm_version\": \"0.6.3.0.20241212\", \"python_version\": \"3.10.12\", \"torch_version\": \"2.4.0+cu121\", \"torch_cuda_version\": \"12.1\", \"cuda_devices\": \"[_CudaDeviceProperties(name='NVIDIA H100 80GB HBM3', major=9, minor=0, total_memory=80994MB, multi_processor_count=132)]\", \"cuda_device_names\": [\"NVIDIA H100 80GB HBM3\"]}, \"gpu_description\": \"NVIDIA H100 80GB HBM3 x 1\", \"script_name\": \"benchmark_serving.py\", \"script_args\": {\"description\": \"VLLM Serving - Dense\\nmodel - facebook/opt-350m\\nmax-model-len - 2048\\nsparsity - None\\nbenchmark_serving {\\n  \\\"nr-qps-pair_\\\": \\\"300,1\\\",\\n  \\\"dataset\\\": \\\"sharegpt\\\"\\n}\", \"backend\": \"vllm\", \"version\": \"N/A\", \"base_url\": null, \"host\": \"127.0.0.1\", \"port\": 9000, \"endpoint\": \"/generate\", \"dataset\": \"sharegpt\", \"num_input_tokens\": null, \"num_output_tokens\": null, \"model\": \"facebook/opt-350m\", \"tokenizer\": \"facebook/opt-350m\", \"best_of\": 1, \"use_beam_search\": false, \"log_model_io\": false, \"seed\": 0, \"trust_remote_code\": false, \"disable_tqdm\": false, \"save_directory\": \"benchmark-results\", \"num_prompts_\": null, \"request_rate_\": null, \"nr_qps_pair_\": [300, \"1.0\"], \"server_tensor_parallel_size\": 1, \"server_args\": \"{'model': 'facebook/opt-350m', 'tokenizer': 'facebook/opt-350m', 'max-model-len': 2048, 'host': '127.0.0.1', 'port': 9000, 'tensor-parallel-size': 1, 'disable-log-requests': ''}\"}, \"date\": \"2024-12-12 02:12:41 UTC\", \"model\": \"facebook/opt-350m\", \"dataset\": \"sharegpt\"}"
+          },
+          {
+            "name": "{\"name\": \"mean_tpot_ms\", \"description\": \"VLLM Serving - Dense\\nmodel - facebook/opt-350m\\nmax-model-len - 2048\\nsparsity - None\\nbenchmark_serving {\\n  \\\"nr-qps-pair_\\\": \\\"300,1\\\",\\n  \\\"dataset\\\": \\\"sharegpt\\\"\\n}\", \"gpu_description\": \"NVIDIA H100 80GB HBM3 x 1\", \"python_version\": \"3.10.12\", \"torch_version\": \"2.4.0+cu121\"}",
+            "value": 6.8900331109488855,
+            "unit": "ms",
+            "extra": "{\"description\": \"VLLM Serving - Dense\\nmodel - facebook/opt-350m\\nmax-model-len - 2048\\nsparsity - None\\nbenchmark_serving {\\n  \\\"nr-qps-pair_\\\": \\\"300,1\\\",\\n  \\\"dataset\\\": \\\"sharegpt\\\"\\n}\", \"benchmarking_context\": {\"vllm_version\": \"0.6.3.0.20241212\", \"python_version\": \"3.10.12\", \"torch_version\": \"2.4.0+cu121\", \"torch_cuda_version\": \"12.1\", \"cuda_devices\": \"[_CudaDeviceProperties(name='NVIDIA H100 80GB HBM3', major=9, minor=0, total_memory=80994MB, multi_processor_count=132)]\", \"cuda_device_names\": [\"NVIDIA H100 80GB HBM3\"]}, \"gpu_description\": \"NVIDIA H100 80GB HBM3 x 1\", \"script_name\": \"benchmark_serving.py\", \"script_args\": {\"description\": \"VLLM Serving - Dense\\nmodel - facebook/opt-350m\\nmax-model-len - 2048\\nsparsity - None\\nbenchmark_serving {\\n  \\\"nr-qps-pair_\\\": \\\"300,1\\\",\\n  \\\"dataset\\\": \\\"sharegpt\\\"\\n}\", \"backend\": \"vllm\", \"version\": \"N/A\", \"base_url\": null, \"host\": \"127.0.0.1\", \"port\": 9000, \"endpoint\": \"/generate\", \"dataset\": \"sharegpt\", \"num_input_tokens\": null, \"num_output_tokens\": null, \"model\": \"facebook/opt-350m\", \"tokenizer\": \"facebook/opt-350m\", \"best_of\": 1, \"use_beam_search\": false, \"log_model_io\": false, \"seed\": 0, \"trust_remote_code\": false, \"disable_tqdm\": false, \"save_directory\": \"benchmark-results\", \"num_prompts_\": null, \"request_rate_\": null, \"nr_qps_pair_\": [300, \"1.0\"], \"server_tensor_parallel_size\": 1, \"server_args\": \"{'model': 'facebook/opt-350m', 'tokenizer': 'facebook/opt-350m', 'max-model-len': 2048, 'host': '127.0.0.1', 'port': 9000, 'tensor-parallel-size': 1, 'disable-log-requests': ''}\"}, \"date\": \"2024-12-12 02:12:41 UTC\", \"model\": \"facebook/opt-350m\", \"dataset\": \"sharegpt\"}"
+          }
+        ]
+      }
+    ]
+  }
+}
