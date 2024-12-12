@@ -214,14 +214,6 @@
           return new Array({ name: "Benchmarks", dataSet: allDataSetsMap });
         }
 
-        function shortPythonVersion(long_py_version_str) {
-          // long_py_version_str = "3.10.12 (main, Mar  7 2024, 18:39:53) [GCC 9.4.0]"
-          // to shortPythonVersion  3.10.12
-          return long_py_version_str
-            .slice(0, long_py_version_str.indexOf(" "))
-            .trim();
-        }
-
         function shortDate(long_date_str) {
           // long_date_str = 2024-03-19 03:26:26 UTC
           // to shortDate 2024-03-19
@@ -253,19 +245,15 @@
               const metric_name = name_json.name;
               const description = name_json.description;
               const gpu_description = name_json.gpu_description;
-              const vllm_version = name_json.vllm_version;
-              const python_version = shortPythonVersion(
-                name_json.python_version
-              );
+              const python_version = name_json.python_version;
               const torch_version = name_json.torch_version;
 
               const title = [
                 metric_name,
                 description,
-                `GPU : ${gpu_description}`,
-                `vllm : ${vllm_version}`,
-                `py_version : ${python_version}`,
-                `torch : ${torch_version}`,
+                `GPU: ${gpu_description}`,
+                `Python: ${python_version}`,
+                `torch: ${torch_version}`,
               ];
               return title;
             }
@@ -434,11 +422,7 @@
                   processOption(extra.benchmarking_context.vllm_version)
                 );
                 py_versions.add(
-                  processOption(
-                    shortPythonVersion(
-                      extra.benchmarking_context.python_version
-                    )
-                  )
+                  processOption(extra.benchmarking_context.python_version)
                 );
                 torch_versions.add(
                   processOption(extra.benchmarking_context.torch_version)
@@ -528,9 +512,7 @@
                     ) &&
                     compareOption(
                       python_version,
-                      shortPythonVersion(
-                        extra.benchmarking_context.python_version
-                      )
+                      extra.benchmarking_context.python_version
                     ) &&
                     compareOption(
                       torch_version,
