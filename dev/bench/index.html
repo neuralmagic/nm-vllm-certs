@@ -2,38 +2,49 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes" />
+    <meta
+      name="viewport"
+      content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes"
+    />
     <style>
       html {
-        font-family: BlinkMacSystemFont,-apple-system,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+        font-family: BlinkMacSystemFont, -apple-system, "Segoe UI", Roboto,
+          Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue",
+          Helvetica, Arial, sans-serif;
         -webkit-font-smoothing: antialiased;
         background-color: #fff;
         font-size: 16px;
       }
+
       body {
         color: #4a4a4a;
         margin: 8px;
         font-size: 1em;
         font-weight: 400;
       }
+
       header {
         margin-bottom: 8px;
         display: flex;
         flex-direction: column;
       }
+
       main {
         width: 100%;
         display: flex;
         flex-direction: column;
       }
+
       a {
         color: #3273dc;
         cursor: pointer;
         text-decoration: none;
       }
+
       a:hover {
         color: #000;
       }
+
       button {
         color: #fff;
         background-color: #3298dc;
@@ -41,36 +52,44 @@
         cursor: pointer;
         text-align: center;
       }
+
       button:hover {
         background-color: #2793da;
         flex: none;
       }
+
       .spacer {
         flex: auto;
       }
+
       .small {
         font-size: 0.75rem;
       }
+
       footer {
         margin-top: 16px;
         display: flex;
         align-items: center;
       }
+
       .header-label {
         margin-right: 4px;
       }
+
       .benchmark-set {
         margin: 8px 0;
         width: 100%;
         display: flex;
         flex-direction: column;
       }
+
       .benchmark-title {
         font-size: 3rem;
         font-weight: 600;
         word-break: break-word;
         text-align: center;
       }
+
       .query-tool {
         display: flex;
         flex-direction: row;
@@ -79,6 +98,7 @@
         flex-wrap: wrap;
         width: 50%;
       }
+
       .benchmark-graphs {
         display: flex;
         flex-direction: row;
@@ -87,6 +107,7 @@
         flex-wrap: wrap;
         width: 100%;
       }
+
       .benchmark-chart {
         max-width: 1000px;
       }
@@ -109,36 +130,43 @@
     <footer>
       <button id="dl-button">Download data as JSON</button>
       <div class="spacer"></div>
-      <div class="small">Powered by <a rel="noopener" href="https://github.com/marketplace/actions/continuous-benchmark">github-action-benchmark</a></div>
+      <div class="small">
+        Powered by
+        <a
+          rel="noopener"
+          href="https://github.com/marketplace/actions/continuous-benchmark"
+          >github-action-benchmark</a
+        >
+      </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.2/dist/Chart.min.js"></script>
     <script src="data.js"></script>
     <script id="main-script">
-      'use strict';
-      (function() {
+      "use strict";
+      (function () {
         // Colors from https://github.com/github/linguist/blob/master/lib/linguist/languages.yml
         const toolColors = {
-          cargo: '#dea584',
-          go: '#00add8',
-          benchmarkjs: '#f1e05a',
-          benchmarkluau: '#000080',
-          pytest: '#3572a5',
-          googlecpp: '#f34b7d',
-          catch2: '#f34b7d',
-          julia: '#a270ba',
-          jmh: '#b07219',
-          benchmarkdotnet: '#178600',
-          customBiggerIsBetter: '#38ff38',
-          customSmallerIsBetter: '#ff3838',
-          _: '#333333'
+          cargo: "#dea584",
+          go: "#00add8",
+          benchmarkjs: "#f1e05a",
+          benchmarkluau: "#000080",
+          pytest: "#3572a5",
+          googlecpp: "#f34b7d",
+          catch2: "#f34b7d",
+          julia: "#a270ba",
+          jmh: "#b07219",
+          benchmarkdotnet: "#178600",
+          customBiggerIsBetter: "#38ff38",
+          customSmallerIsBetter: "#ff3838",
+          _: "#333333",
         };
 
         function init() {
           function collectBenchesPerTestCase(entries) {
             const map = new Map();
             for (const entry of entries) {
-              const {commit, date, tool, benches} = entry;
+              const { commit, date, tool, benches } = entry;
               for (const bench of benches) {
                 const result = { commit, date, tool, bench };
                 const arr = map.get(bench.name);
@@ -155,132 +183,160 @@
           const data = window.BENCHMARK_DATA;
 
           // Render header
-          document.getElementById('last-update').textContent = new Date(data.lastUpdate).toString();
-          const repoLink = document.getElementById('repository-link');
+          document.getElementById("last-update").textContent = new Date(
+            data.lastUpdate
+          ).toString();
+          const repoLink = document.getElementById("repository-link");
           repoLink.href = data.repoUrl;
           repoLink.textContent = data.repoUrl;
 
           // Render footer
-          document.getElementById('dl-button').onclick = () => {
-            const dataUrl = 'data:,' + JSON.stringify(data, null, 2);
-            const a = document.createElement('a');
+          document.getElementById("dl-button").onclick = () => {
+            const dataUrl = "data:," + JSON.stringify(data, null, 2);
+            const a = document.createElement("a");
             a.href = dataUrl;
-            a.download = 'benchmark_data.json';
+            a.download = "benchmark_data.json";
             a.click();
           };
 
           // Prepare data points for charts
-          let allDataSets = Object.keys(data.entries).map(name =>
+          let allDataSets = Object.keys(data.entries).map((name) =>
             collectBenchesPerTestCase(data.entries[name])
           );
 
           // Combine all datasets
-          let allDataSetsMap = new Map()
+          let allDataSetsMap = new Map();
           for (const DataSet of allDataSets) {
             for (const [name, bench] of DataSet) {
-              allDataSetsMap.set(name, bench)
+              allDataSetsMap.set(name, bench);
             }
           }
-          return new Array({name: "Benchmarks", dataSet: allDataSetsMap});
+          return new Array({ name: "Benchmarks", dataSet: allDataSetsMap });
         }
 
         function shortPythonVersion(long_py_version_str) {
           // long_py_version_str = "3.10.12 (main, Mar  7 2024, 18:39:53) [GCC 9.4.0]"
           // to shortPythonVersion  3.10.12
-          return long_py_version_str.slice(0, long_py_version_str.indexOf(" ")).trim()
+          return long_py_version_str
+            .slice(0, long_py_version_str.indexOf(" "))
+            .trim();
         }
 
         function shortDate(long_date_str) {
           // long_date_str = 2024-03-19 03:26:26 UTC
           // to shortDate 2024-03-19
-          return long_date_str.slice(0, long_date_str.indexOf(" ")).trim()
+          return long_date_str.slice(0, long_date_str.indexOf(" ")).trim();
         }
 
         function renderAllChars(dataSets) {
-
           function renderGraph(parent, name, dataset) {
-            const canvas = document.createElement('canvas');
-            canvas.className = 'benchmark-chart';
+            const canvas = document.createElement("canvas");
+            canvas.className = "benchmark-chart";
             parent.appendChild(canvas);
 
-            const color = toolColors[dataset.length > 0 ? dataset[0].tool : '_'];
+            const color =
+              toolColors[dataset.length > 0 ? dataset[0].tool : "_"];
             const data = {
-              labels: dataset.map(d => d.commit.id.slice(0, 7)),
+              labels: dataset.map((d) => d.commit.id.slice(0, 7)),
               datasets: [
                 {
                   label: JSON.parse(name).name,
-                  data: dataset.map(d => d.bench.value),
+                  data: dataset.map((d) => d.bench.value),
                   borderColor: color,
-                  backgroundColor: color + '60', // Add alpha for #rrggbbaa
-                }
+                  backgroundColor: color + "60", // Add alpha for #rrggbbaa
+                },
               ],
             };
 
             function chartTitle() {
-              const name_json = JSON.parse(name)
-              const metric_name = name_json.name
-              const description = name_json.description
-              const gpu_description = name_json.gpu_description
-              const vllm_version = name_json.vllm_version
-              const python_version = shortPythonVersion(name_json.python_version)
-              const torch_version = name_json.torch_version
+              const name_json = JSON.parse(name);
+              const metric_name = name_json.name;
+              const description = name_json.description;
+              const gpu_description = name_json.gpu_description;
+              const vllm_version = name_json.vllm_version;
+              const python_version = shortPythonVersion(
+                name_json.python_version
+              );
+              const torch_version = name_json.torch_version;
 
-              const title = [metric_name, description, `GPU : ${gpu_description}`, `vllm : ${vllm_version}`, `py_version : ${python_version}`, `torch : ${torch_version}`]
-              return title
+              const title = [
+                metric_name,
+                description,
+                `GPU : ${gpu_description}`,
+                `vllm : ${vllm_version}`,
+                `py_version : ${python_version}`,
+                `torch : ${torch_version}`,
+              ];
+              return title;
             }
 
             const options = {
-              title : {
+              title: {
                 display: true,
-                text: chartTitle(data)
+                text: chartTitle(data),
               },
               scales: {
                 xAxes: [
                   {
                     scaleLabel: {
                       display: true,
-                      labelString: 'commit',
+                      labelString: "commit",
                     },
-                  }
+                  },
                 ],
                 yAxes: [
                   {
                     scaleLabel: {
                       display: true,
-                      labelString: dataset.length > 0 ? dataset[0].bench.unit : '',
+                      labelString:
+                        dataset.length > 0 ? dataset[0].bench.unit : "",
                     },
                     ticks: {
                       beginAtZero: true,
-                    }
-                  }
+                    },
+                  },
                 ],
               },
               tooltips: {
                 callbacks: {
-                  afterTitle: items => {
-                    const {index} = items[0];
+                  afterTitle: (items) => {
+                    const { index } = items[0];
                     const data = dataset[index];
-                    return '\n' + data.commit.message + '\n\n' + data.commit.timestamp + ' committed by @' + data.commit.committer.username + '\n';
+                    return (
+                      "\n" +
+                      data.commit.message +
+                      "\n\n" +
+                      data.commit.timestamp +
+                      " committed by @" +
+                      data.commit.committer.username +
+                      "\n"
+                    );
                   },
-                  label: item => {
+                  label: (item) => {
                     let label = item.value;
                     const { range, unit } = dataset[item.index].bench;
-                    label += ' ' + unit;
+                    label += " " + unit;
                     if (range) {
-                      label += ' (' + range + ')';
+                      label += " (" + range + ")";
                     }
                     return label;
                   },
-                  afterLabel: item => {
+                  afterLabel: (item) => {
                     const extra = dataset[item.index].bench.extra;
                     if (!extra) {
-                      return ''
+                      return "";
                     }
-                    const extra_json = JSON.parse(extra)
-                    const extra_str = `\n script-name ${extra_json.script_name} \n script-args : ${JSON.stringify(extra_json.script_args, null, 2)})`
+                    const extra_json = JSON.parse(extra);
+                    const extra_str = `\n script-name ${
+                      extra_json.script_name
+                    } \n script-args : ${JSON.stringify(
+                      extra_json.script_args,
+                      null,
+                      2
+                    )})`;
                     return extra_str;
-                  }
-                }
+                  },
+                },
               },
               onClick: (_mouseEvent, activeElems) => {
                 if (activeElems.length === 0) {
@@ -289,190 +345,226 @@
                 // XXX: Undocumented. How can we know the index?
                 const index = activeElems[0]._index;
                 const url = dataset[index].commit.url;
-                window.open(url, '_blank');
+                window.open(url, "_blank");
               },
             };
 
             new Chart(canvas, {
-              type: 'line',
+              type: "line",
               data,
               options,
             });
           }
 
           function renderBenchSet(name, benchSet, main) {
-
-            const prev_bench_set = document.getElementById('benchmark-set')
+            const prev_bench_set = document.getElementById("benchmark-set");
             if (prev_bench_set != null) {
-              prev_bench_set.remove()
+              prev_bench_set.remove();
             }
 
-            const setElem = document.createElement('div');
-            setElem.className = 'benchmark-set';
-            setElem.id = 'benchmark-set'
+            const setElem = document.createElement("div");
+            setElem.className = "benchmark-set";
+            setElem.id = "benchmark-set";
             main.appendChild(setElem);
 
-            const nameElem = document.createElement('h1');
-            nameElem.className = 'benchmark-title';
+            const nameElem = document.createElement("h1");
+            nameElem.className = "benchmark-title";
             nameElem.textContent = name;
             setElem.appendChild(nameElem);
 
-            const graphsElem = document.createElement('div');
-            graphsElem.className = 'benchmark-graphs';
+            const graphsElem = document.createElement("div");
+            graphsElem.className = "benchmark-graphs";
             setElem.appendChild(graphsElem);
 
             for (const [benchName, benches] of benchSet.entries()) {
-              renderGraph(graphsElem, benchName, benches)
+              renderGraph(graphsElem, benchName, benches);
             }
           }
 
           function prepareQueryTool(main, dataSets) {
-
             function addDropDown(div, dropDownName, dropDownOptions) {
-              const name = document.createElement('h5');
+              const name = document.createElement("h5");
               name.textContent = dropDownName;
               div.appendChild(name);
 
-              const s = document.createElement('select')
-              s.id = dropDownName
+              const s = document.createElement("select");
+              s.id = dropDownName;
               for (const item of dropDownOptions) {
-                s.options.add(new Option(item))
+                s.options.add(new Option(item));
               }
 
-              div.appendChild(s)
+              div.appendChild(s);
             }
 
             function processOption(option_str) {
               if (option_str === null) {
-                return "null"
+                return "null";
               }
-              option_str = option_str.trim()
+              option_str = option_str.trim();
               if (option_str === "") {
-                return "null"
+                return "null";
               }
-              return option_str
+              return option_str;
             }
 
-            const ANY_STR = "any"
+            const ANY_STR = "any";
 
             function compareOption(option, to_compare) {
               return option === ANY_STR || option === processOption(to_compare);
             }
 
-            let metrics = new Set([ANY_STR])
-            let dates = new Set([ANY_STR])
-            let models = new Set([ANY_STR])
-            let datasets = new Set([ANY_STR])
-            let gpus = new Set([ANY_STR])
-            let script_names = new Set([ANY_STR])
-            let vllm_versions = new Set([ANY_STR])
-            let py_versions = new Set([ANY_STR])
-            let torch_versions = new Set([ANY_STR])
-            for (const {name, dataSet} of dataSets) {
+            let metrics = new Set([ANY_STR]);
+            let dates = new Set([ANY_STR]);
+            let models = new Set([ANY_STR]);
+            let datasets = new Set([ANY_STR]);
+            let gpus = new Set([ANY_STR]);
+            let script_names = new Set([ANY_STR]);
+            let vllm_versions = new Set([ANY_STR]);
+            let py_versions = new Set([ANY_STR]);
+            let torch_versions = new Set([ANY_STR]);
+            for (const { name, dataSet } of dataSets) {
               for (const [key, values] of dataSet.entries()) {
-                const extra = JSON.parse(values[0].bench.extra)
-                metrics.add(processOption(JSON.parse(key).name))
-                models.add(processOption(extra.model))
-                datasets.add(processOption(extra.dataset))
-                gpus.add(processOption(extra.gpu_description))
-                script_names.add(processOption(extra.script_name))
-                vllm_versions.add(processOption(extra.benchmarking_context.vllm_version))
-                py_versions.add(processOption(shortPythonVersion(extra.benchmarking_context.python_version)))
-                torch_versions.add(processOption(extra.benchmarking_context.torch_version))
+                const extra = JSON.parse(values[0].bench.extra);
+                metrics.add(processOption(JSON.parse(key).name));
+                models.add(processOption(extra.model));
+                datasets.add(processOption(extra.dataset));
+                gpus.add(processOption(extra.gpu_description));
+                script_names.add(processOption(extra.script_name));
+                vllm_versions.add(
+                  processOption(extra.benchmarking_context.vllm_version)
+                );
+                py_versions.add(
+                  processOption(
+                    shortPythonVersion(
+                      extra.benchmarking_context.python_version
+                    )
+                  )
+                );
+                torch_versions.add(
+                  processOption(extra.benchmarking_context.torch_version)
+                );
 
                 // Each value is has a different date
                 for (const value of values) {
-                  dates.add(processOption(shortDate(JSON.parse(value.bench.extra).date)))
+                  dates.add(
+                    processOption(shortDate(JSON.parse(value.bench.extra).date))
+                  );
                 }
               }
             }
 
             function filter_bench_by_date(benches, date_query) {
               if (date_query == ANY_STR) {
-                return benches
+                return benches;
               }
 
-              let filtered_benches = new Array()
+              let filtered_benches = new Array();
               for (const item of benches) {
-                if (compareOption(date_query, shortDate(JSON.parse(item.bench.extra).date))) {
-                  filtered_benches.push(item)
+                if (
+                  compareOption(
+                    date_query,
+                    shortDate(JSON.parse(item.bench.extra).date)
+                  )
+                ) {
+                  filtered_benches.push(item);
                 }
               }
-              return filtered_benches
+              return filtered_benches;
             }
 
             // == Query ====
-            const queryElem = document.createElement('div');
-            queryElem.className = 'query-tool'
-            queryElem.textContent = 'query-tool'
-            queryElem.id = 'query-tool'
-            main.appendChild(queryElem)
+            const queryElem = document.createElement("div");
+            queryElem.className = "query-tool";
+            queryElem.textContent = "query-tool";
+            queryElem.id = "query-tool";
+            main.appendChild(queryElem);
 
-            addDropDown(queryElem, "dates", dates)
-            addDropDown(queryElem, "metrics", metrics)
-            addDropDown(queryElem, "models", models)
-            addDropDown(queryElem, "datasets", datasets)
-            addDropDown(queryElem, "GPU", gpus)
-            addDropDown(queryElem, "script_name", script_names)
-            addDropDown(queryElem, "vllm_version", vllm_versions)
-            addDropDown(queryElem, "python_version", py_versions)
-            addDropDown(queryElem, "torch_version", torch_versions)
+            addDropDown(queryElem, "dates", dates);
+            addDropDown(queryElem, "metrics", metrics);
+            addDropDown(queryElem, "models", models);
+            addDropDown(queryElem, "datasets", datasets);
+            addDropDown(queryElem, "GPU", gpus);
+            addDropDown(queryElem, "script_name", script_names);
+            addDropDown(queryElem, "vllm_version", vllm_versions);
+            addDropDown(queryElem, "python_version", py_versions);
+            addDropDown(queryElem, "torch_version", torch_versions);
 
             function filterCharts() {
-              const date = queryElem.querySelector('[id=dates]').value
-              const metric = queryElem.querySelector('[id=metrics]').value
-              const model = queryElem.querySelector('[id=models]').value
-              const dataset = queryElem.querySelector('[id=datasets]').value
-              const gpu = queryElem.querySelector('[id=GPU]').value
-              const script_name = queryElem.querySelector('[id=script_name]').value
-              const vllm_version = queryElem.querySelector('[id=vllm_version]').value
-              const python_version = queryElem.querySelector('[id=python_version]').value
-              const torch_version = queryElem.querySelector('[id=torch_version]').value
+              const date = queryElem.querySelector("[id=dates]").value;
+              const metric = queryElem.querySelector("[id=metrics]").value;
+              const model = queryElem.querySelector("[id=models]").value;
+              const dataset = queryElem.querySelector("[id=datasets]").value;
+              const gpu = queryElem.querySelector("[id=GPU]").value;
+              const script_name =
+                queryElem.querySelector("[id=script_name]").value;
+              const vllm_version =
+                queryElem.querySelector("[id=vllm_version]").value;
+              const python_version = queryElem.querySelector(
+                "[id=python_version]"
+              ).value;
+              const torch_version =
+                queryElem.querySelector("[id=torch_version]").value;
 
-              let filtered_datasets = new Array()
+              let filtered_datasets = new Array();
 
-              for (const {name, dataSet} of dataSets) {
-                let filtered_dataset_map = new Map()
-                filtered_datasets.push({name: name, dataSet: filtered_dataset_map})
+              for (const { name, dataSet } of dataSets) {
+                let filtered_dataset_map = new Map();
+                filtered_datasets.push({
+                  name: name,
+                  dataSet: filtered_dataset_map,
+                });
 
                 for (const [key, values] of dataSet.entries()) {
-                  const extra = JSON.parse(values[0].bench.extra)
-                  let put_values = (
-                      compareOption(metric, JSON.parse(key).name) &&
-                      compareOption(model, extra.model) &&
-                      compareOption(dataset, extra.dataset) &&
-                      compareOption(gpu, extra.gpu_description) &&
-                      compareOption(script_name, extra.script_name) &&
-                      compareOption(vllm_version, extra.benchmarking_context.vllm_version) &&
-                      compareOption(python_version, shortPythonVersion(extra.benchmarking_context.python_version)) &&
-                      compareOption(torch_version, extra.benchmarking_context.torch_version))
+                  const extra = JSON.parse(values[0].bench.extra);
+                  let put_values =
+                    compareOption(metric, JSON.parse(key).name) &&
+                    compareOption(model, extra.model) &&
+                    compareOption(dataset, extra.dataset) &&
+                    compareOption(gpu, extra.gpu_description) &&
+                    compareOption(script_name, extra.script_name) &&
+                    compareOption(
+                      vllm_version,
+                      extra.benchmarking_context.vllm_version
+                    ) &&
+                    compareOption(
+                      python_version,
+                      shortPythonVersion(
+                        extra.benchmarking_context.python_version
+                      )
+                    ) &&
+                    compareOption(
+                      torch_version,
+                      extra.benchmarking_context.torch_version
+                    );
 
                   if (!put_values) {
-                    continue
+                    continue;
                   }
 
-                  filtered_dataset_map.set(key, filter_bench_by_date(values, date))
+                  filtered_dataset_map.set(
+                    key,
+                    filter_bench_by_date(values, date)
+                  );
                 }
               }
-              renderDatasets(filtered_datasets)
+              renderDatasets(filtered_datasets);
             }
 
-            const b = document.createElement('button')
-            b.textContent = 'filter'
-            b.onclick= filterCharts
-            queryElem.appendChild(b)
-
+            const b = document.createElement("button");
+            b.textContent = "filter";
+            b.onclick = filterCharts;
+            queryElem.appendChild(b);
           }
 
-          function renderDatasets(dataSets)  {
-            for (const {name, dataSet} of dataSets) {
+          function renderDatasets(dataSets) {
+            for (const { name, dataSet } of dataSets) {
               renderBenchSet(name, dataSet, main);
             }
           }
 
-          const main = document.getElementById('main');
-          prepareQueryTool(main, dataSets)
-          renderDatasets(dataSets)
+          const main = document.getElementById("main");
+          prepareQueryTool(main, dataSets);
+          renderDatasets(dataSets);
         }
 
         renderAllChars(init()); // Start
